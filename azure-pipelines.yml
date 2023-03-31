@@ -6,10 +6,6 @@ variables:
   buildConfiguration: Release
   buildArtifactStagingDirectory: '**/*.csproj'
 steps:
-  - task: UseDotNet@2
-    inputs:
-     version: '3.1.0'
-     packageType: runtime
   - task: DotNetCoreCLI@2
     inputs:
       command: test
@@ -22,7 +18,7 @@ steps:
     inputs:
       command: publish
       publishWebProjects: false
-      projects: 'BooksNET6API/BooksNET6API.csproj'
+      projects: buildArtifactStagingDirectory
       arguments: '--configuration $(BuildConfiguration) --output $(buildArtifactStagingDirectory)'
       zipAfterPublish: true
   - task: PublishBuildArtifacts@1
