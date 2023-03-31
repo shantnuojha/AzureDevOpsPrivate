@@ -4,11 +4,8 @@ pool:
   vmImage: ubuntu-latest
 variables:
   buildConfiguration: Release
+  buildArtifactStagingDirectory: '**/**/*.csproj'
 steps:
-  - task: UseDotNet@2
-    inputs:
-     version: '3.1.0'
-     packageType: runtime
   - task: DotNetCoreCLI@2
     inputs:
       command: test
@@ -20,9 +17,11 @@ steps:
     displayName: 'dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     inputs:
       command: publish
-      publishWebProjects: false
-      projects: 'BooksNET6API/BooksNET6API.csproj'
-      arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+      publishWebProjects: true
+      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: true
   - task: PublishBuildArtifacts@1
     displayName: 'publish artifacts'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)' 
+      artifactName: 'AzureDevOps'
