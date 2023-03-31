@@ -17,9 +17,11 @@ steps:
     displayName: 'dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     inputs:
       command: publish
-      publishWebProjects: false
-      projects: buildArtifactStagingDirectory
+      publishWebProjects: true
       arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: true
   - task: PublishBuildArtifacts@1
     displayName: 'publish artifacts'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)' 
+      artifactName: 'AzureDevOps'
