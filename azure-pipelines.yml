@@ -5,6 +5,10 @@ pool:
 variables:
   buildConfiguration: Release
 steps:
+  - task: UseDotNet@2
+    inputs:
+     version: '5.0.x'
+     packageType: runtime
   - task: DotNetCoreCLI@2
     inputs:
       command: test
