@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Azure.TestAPI.Test
+build_property.ProjectDir = D:\PROJECTS\Azure DevOps\DotNetProject\Azure.TestAPI.Solution\Azure.TestAPI.Test\
